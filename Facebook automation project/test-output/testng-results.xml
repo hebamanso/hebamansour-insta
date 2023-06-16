@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-06-16T22:39:34 EEST" name="Default suite" finished-at="2023-06-16T22:40:20 EEST" duration-ms="46380">
+    <groups>
+    </groups>
+    <test started-at="2023-06-16T22:39:34 EEST" name="Default test" finished-at="2023-06-16T22:40:20 EEST" duration-ms="46380">
+      <class name="Facebook.InvalidLogin">
+        <test-method is-config="true" signature="main()[pri:0, instance:Facebook.InvalidLogin@44c03695]" started-at="2023-06-16T22:39:34 EEST" name="main" finished-at="2023-06-16T22:39:37 EEST" duration-ms="2540" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- main -->
+        <test-method signature="LogininvalidEmPW()[pri:0, instance:Facebook.InvalidLogin@44c03695]" started-at="2023-06-16T22:39:37 EEST" name="LogininvalidEmPW" finished-at="2023-06-16T22:39:42 EEST" duration-ms="5222" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LogininvalidEmPW -->
+        <test-method signature="LogininvalidPw()[pri:0, instance:Facebook.InvalidLogin@44c03695]" started-at="2023-06-16T22:39:42 EEST" name="LogininvalidPw" finished-at="2023-06-16T22:39:47 EEST" duration-ms="5201" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LogininvalidPw -->
+        <test-method signature="Loginwithblank()[pri:0, instance:Facebook.InvalidLogin@44c03695]" started-at="2023-06-16T22:39:47 EEST" name="Loginwithblank" finished-at="2023-06-16T22:39:52 EEST" duration-ms="5092" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Loginwithblank -->
+      </class> <!-- Facebook.InvalidLogin -->
+      <class name="Facebook.TestRegistration">
+        <test-method is-config="true" signature="main()[pri:0, instance:Facebook.TestRegistration@6989da5e]" started-at="2023-06-16T22:39:52 EEST" name="main" finished-at="2023-06-16T22:39:54 EEST" duration-ms="2047" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- main -->
+        <test-method signature="Register()[pri:0, instance:Facebook.TestRegistration@6989da5e]" started-at="2023-06-16T22:39:54 EEST" name="Register" finished-at="2023-06-16T22:40:06 EEST" duration-ms="12263" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Register -->
+      </class> <!-- Facebook.TestRegistration -->
+      <class name="Facebook.ValidLogin">
+        <test-method is-config="true" signature="main()[pri:0, instance:Facebook.ValidLogin@385c9627]" started-at="2023-06-16T22:40:06 EEST" name="main" finished-at="2023-06-16T22:40:12 EEST" duration-ms="5467" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- main -->
+        <test-method signature="LoginByEmailValidPwValid()[pri:0, instance:Facebook.ValidLogin@385c9627]" started-at="2023-06-16T22:40:12 EEST" name="LoginByEmailValidPwValid" finished-at="2023-06-16T22:40:20 EEST" duration-ms="8506" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LoginByEmailValidPwValid -->
+      </class> <!-- Facebook.ValidLogin -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
