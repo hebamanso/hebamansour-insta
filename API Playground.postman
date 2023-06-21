@@ -1,0 +1,1282 @@
+{
+	"info": {
+		"_postman_id": "4d684fa0-c1ff-41a7-965a-12fd5d2a6b45",
+		"name": "API Playground",
+		"description": "These requests showcase some of the things you can do with the API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18994117",
+		"_collection_link": "https://martian-astronaut-87262.postman.co/workspace/Bestbuy~84689ada-f9ab-4582-a940-973eccf029b2/collection/18994117-4d684fa0-c1ff-41a7-965a-12fd5d2a6b45?action=share&creator=18994117&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Highest Priced Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"\r",
+							"\r",
+							"var datablock = jsondata.data;\r",
+							"console.log(typeof datablock);\r",
+							"\r",
+							"\r",
+							"//get length of array\r",
+							"var leng = datablock.length;\r",
+							"console.log(leng);\r",
+							"\r",
+							"\r",
+							"if (pm.response.code == 200) {\r",
+							"\r",
+							"    //to test the api get 200 and working fine\r",
+							"    pm.test(\"status code is 200\", function () {\r",
+							"    });\r",
+							"\r",
+							"            // var prices = [10299.99,16299.99,14999.98,12999.99,12299.99,11999.98,11499.99,10999.99,27999.98];\r",
+							"\r",
+							"\r",
+							"                   for (var i = 0; i < leng; i++) {\r",
+							"\r",
+							"                         prices = datablock[i].price;\r",
+							"                          var array=[prices];\r",
+							"                          sortedarray=array.sort(function(a, b){return b-a});\r",
+							"\r",
+							"                        //   sortedarray= prices.sort();\r",
+							"                          console.log(sortedarray);\r",
+							"\r",
+							"                   pm.test(\"Product name \" + [i+1] + \" is ( \" + datablock[i].name + \" )  with price  \" + datablock[i].price , function () { \r",
+							"\r",
+							"\r",
+							"                   pm.expect(datablock[i].price).to.eql(sortedarray[0]);\r",
+							"                     });\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"                }//for\r",
+							"\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/products?$sort[price]=-1",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "$sort[price]",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Name and Description Only",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"\r",
+							"\r",
+							"var datablock= jsondata.data;\r",
+							"    console.log(typeof datablock);\r",
+							"\r",
+							"\r",
+							"//get length \r",
+							"var leng=datablock.length;\r",
+							"console.log(leng);\r",
+							"\r",
+							"\r",
+							"if (pm.response.code == 200) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"       // pm.expect(datablock[0].name).to.eql('Duracell - AAA Batteries (4-Pack)');\r",
+							"\r",
+							"var productsnames = [\"Duracell - AAA Batteries (4-Pack)\",\r",
+							"                     \"Duracell - AA 1.5V CopperTop Batteries (4-Pack)\",\r",
+							"                     \"Duracell - AA Batteries (8-Pack)\",\r",
+							"                     \"Energizer - MAX Batteries AA (4-Pack)\",\r",
+							"                     \"Duracell - C Batteries (4-Pack)\",\r",
+							"                     \"Duracell - D Batteries (4-Pack)\",\r",
+							"                     \"Pioneer - 4\\\" 3-Way Surface-Mount Speakers with IMPP Composite Cones (Pair) - Black\",\r",
+							"                     \"Duracell - 9V Batteries (2-Pack)\",\r",
+							"                     \"Energizer - N Cell E90 Batteries (2-Pack)\",\r",
+							"                     \"Metra - Radio Installation Dash Kit for Most 1989-2000 Ford, Lincoln & Mercury Vehicles - Black\"];\r",
+							"\r",
+							"var productsdesc = [\"Compatible with select electronic devices; AAA size; DURALOCK Power Preserve technology; 4-pack\",\r",
+							"                     \"Long-lasting energy; DURALOCK Power Preserve technology; for toys, clocks, radios, games, remotes, PDAs and more\",\r",
+							"                     \"Compatible with select electronic devices; AA size; DURALOCK Power Preserve technology; 8-pack\",\r",
+							"                     \"4-pack AA alkaline batteries; battery tester included\",\r",
+							"                     \"Compatible with select electronic devices; C size; DURALOCK Power Preserve technology; 4-pack\",\r",
+							"                     \"Compatible with select electronic devices; D size; DURALOCK Power Preserve technology; 4-pack\",\r",
+							"                     \"80W maximum power (20W RMS); 4\\\" IMPP composite cone woofer; 3/4\\\" horn tweeter\",\r",
+							"                     \"Compatible with select electronic devices; alkaline chemistry; 9V size; DURALOCK Power Preserve technology; 2-pack\",\r",
+							"                     \"Alkaline batteries; 1.5V\",\r",
+							"                     \"From our expanded online assortment; compatible with most 1989-2000 Ford, Lincoln and Mercury vehicles; snap-in TurboKit offers fast installation; spacer/trim ring; rear support bracket\",\r",
+							"                     \"\"];\r",
+							"\r",
+							"\r",
+							"//loop on array\r",
+							"for (var i=0; i<leng; i++){\r",
+							"\r",
+							"\r",
+							"pm.test(\"Product name \" + [i+1] + \" is  \" + productsnames[i] , function () { \r",
+							"    pm.expect(datablock[i].name).to.eql(productsnames[i]);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Product description  \" + [i+1] + \" is  \" + productsdesc[i], function () { \r",
+							"    pm.expect(datablock[i].description).to.eql(productsdesc[i]);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"}//if\r",
+							"\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/products?$select[]=name&$select[]=description",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "$select[]",
+							"value": "name"
+						},
+						{
+							"key": "$select[]",
+							"value": "description"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TVs with free shipping and price between $500 and $800",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"\r",
+							"\r",
+							"var datablock= jsondata.data;\r",
+							"    console.log(typeof datablock);\r",
+							"\r",
+							"\r",
+							"//get length\r",
+							"var leng=datablock.length;\r",
+							"console.log(leng);\r",
+							"\r",
+							"\r",
+							"if (pm.response.code == 200) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"var limit=jsondata.limit;\r",
+							"\r",
+							"//loop on array\r",
+							"for (var i=0; i<leng; i++){\r",
+							"\r",
+							"     if((500> datablock.price < 800) ){\r",
+							"\r",
+							"         if(datablock.shipping = \"0\" ){\r",
+							"             console.log(\"shiping\");\r",
+							"\r",
+							"              //categoryname\r",
+							"               var lengcategory= datablock[i].categories.length;\r",
+							"                    console.log(lengcategory);\r",
+							"\r",
+							"                      for (var y=0; y<lengcategory; y++){\r",
+							"\r",
+							"                    if(datablock[i].categories[y].name.includes(\"TV\")){\r",
+							"\r",
+							"                    //product category is TVs\r",
+							"                    pm.test(\"Category \" + [y+1] + \"   for product   \"+ datablock[i].name , function () { \r",
+							"                     pm.expect(datablock[i].categories[y].name).contains(\"TV\");\r",
+							"                     });\r",
+							"\r",
+							"\r",
+							"                    }//if            \r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}//for categoryleng\r",
+							"          }//if shipping 0\r",
+							"\r",
+							"        }//if price less than 500 and more than 800\r",
+							"}//for dataleng\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/products?category.name=TVs&price[$gt]=500&price[$lt]=800&shipping[$eq]=0",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "category.name",
+							"value": "TVs"
+						},
+						{
+							"key": "price[$gt]",
+							"value": "500"
+						},
+						{
+							"key": "price[$lt]",
+							"value": "800"
+						},
+						{
+							"key": "shipping[$eq]",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category Names Only",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"\r",
+							"\r",
+							"if (pm.response.code == 200) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"}else\r",
+							"if (pm.response.code == 500) {\r",
+							"\r",
+							"\r",
+							"                    pm.test(\"Error code \" + jsondata.code , function () { \r",
+							"                     pm.expect(jsondata.code).to.eql(500);\r",
+							"                     });\r",
+							"\r",
+							"                    pm.test(\"Error message is \" + jsondata.message , function () { \r",
+							"                     pm.expect(jsondata.message).to.eql(\"Cannot read properties of undefined (reading 'map')\");\r",
+							"\r",
+							"                     });\r",
+							"\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/categories?$select[]=name",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"categories"
+					],
+					"query": [
+						{
+							"key": "$select[]",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories with TV in the name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"\r",
+							"\r",
+							"var datablock= jsondata.data;\r",
+							"    console.log(typeof datablock);\r",
+							"\r",
+							"\r",
+							"//get length\r",
+							"var leng=datablock.length;\r",
+							"console.log(leng);\r",
+							"\r",
+							"\r",
+							"if (pm.response.code == 200) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"var limit=jsondata.limit;\r",
+							"\r",
+							"//loop on array\r",
+							"for (var i=0; i<leng; i++){\r",
+							"\r",
+							"\r",
+							"                    //product category is TVs\r",
+							"                    pm.test(\"Category \" + [i+1] + \"  name is \" + datablock[i].name , function () { \r",
+							"                     pm.expect(datablock[i].name).contains(\"TV\");\r",
+							"                     });\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}//for dataleng\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/categories?name[$like]=*TV*",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"categories"
+					],
+					"query": [
+						{
+							"key": "name[$like]",
+							"value": "*TV*"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find stores in Minnesota",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"\r",
+							"\r",
+							"var datablock= jsondata.data;\r",
+							"    console.log(typeof datablock);\r",
+							"\r",
+							"\r",
+							"//get length \r",
+							"var leng=datablock.length;\r",
+							"console.log(leng);\r",
+							"\r",
+							"\r",
+							"if (pm.response.code == 200) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"var limit=jsondata.limit;\r",
+							"\r",
+							"//loop on array\r",
+							"for (var i=0; i<leng; i++){\r",
+							"\r",
+							"\r",
+							"                    //stores with state minnesota\r",
+							"                    pm.test(\"store \" + [i+1] + \"  name is \" + datablock[i].name , function () { \r",
+							"                     pm.expect(datablock[i].state).to.eql(\"MN\");\r",
+							"                     });\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}//for dataleng\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/stores?state=MN",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"stores"
+					],
+					"query": [
+						{
+							"key": "state",
+							"value": "MN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find stores that sell Apple products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"\r",
+							"\r",
+							"var datablock= jsondata.data;\r",
+							"    console.log(typeof datablock);\r",
+							"\r",
+							"\r",
+							"//get length\r",
+							"var leng=datablock.length;\r",
+							"console.log(leng);\r",
+							"\r",
+							"\r",
+							"if (pm.response.code == 200) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"var limit=jsondata.limit;\r",
+							"\r",
+							"//loop on array\r",
+							"for (var i=0; i<leng; i++){\r",
+							"\r",
+							"              //services\r",
+							"               var lengservices= datablock[i].services.length;\r",
+							"                    console.log(lengservices);\r",
+							"\r",
+							"                      for (var y=0; y<lengservices; y++){\r",
+							"\r",
+							"                    if(datablock[i].services[y].name ==\"Apple Shop\"){\r",
+							"\r",
+							"                    //stores if service is \"Apple Shop\"\r",
+							"                    pm.test(\"store \" + [i+1] + \"  name is \" + datablock[i].name , function () { \r",
+							"                     pm.expect(datablock[i].services[y].name).to.eql(\"Apple Shop\");\r",
+							"                     });\r",
+							"\r",
+							"\r",
+							"                      }//if\r",
+							"\r",
+							"                      }\r",
+							"}//for dataleng\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/stores?service.name=Apple Shop",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"stores"
+					],
+					"query": [
+						{
+							"key": "service.name",
+							"value": "Apple Shop"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Stores Within 10 Miles of Beverly Hills",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"\r",
+							"\r",
+							"var datablock= jsondata.data;\r",
+							"    console.log(typeof datablock);\r",
+							"\r",
+							"\r",
+							"//get length\r",
+							"var leng=datablock.length;\r",
+							"console.log(leng);\r",
+							"\r",
+							"\r",
+							"if (pm.response.code == 200) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"var limit=jsondata.limit;\r",
+							"\r",
+							"var BeverlyHillslat= \"34.073620\";\r",
+							"var BeverlyHillslong= \"-118.400356\";\r",
+							"\r",
+							"//loop on array\r",
+							"for (var i=0; i<leng; i++){\r",
+							"\r",
+							"\r",
+							"         var   lat1=datablock[i].lat;\r",
+							"         var   lng1=datablock[i].lng;\r",
+							"\r",
+							"// //working\r",
+							"\t// var R = 6371; // km \r",
+							"    var R =3963.19;\r",
+							"\tvar dLat = (lat1-BeverlyHillslat) * Math.PI / 180;\r",
+							"\tvar dLon = (lng1-BeverlyHillslong) * Math.PI / 180;\r",
+							"\tvar a = Math.sin(dLat/2) * Math.sin(dLat/2) +\r",
+							"\t\tMath.cos(lat1 * Math.PI / 180 ) * Math.cos(BeverlyHillslat * Math.PI / 180 ) *\r",
+							"\t\tMath.sin(dLon/2) * Math.sin(dLon/2);\r",
+							"\tvar c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));\r",
+							"\tvar d = R * c;\r",
+							"\t// if (d>1) return Math.round(d)+\"km\";\r",
+							"    // console.log (Math.round(d)+\"km\");\r",
+							"\t// else if (d<=1) return Math.round(d*1000)+\"m\";\r",
+							"    Miles= Math.round(d)+\"miles\";\r",
+							"\r",
+							"    console.log(Miles);\r",
+							"\r",
+							"                    //stores name category within 10 miles of \r",
+							"                    pm.test(\"store \" + [i+1] + \"  name is \" + datablock[i].name , function () { \r",
+							"                     pm.expect(datablock[i].name);\r",
+							"                     });\r",
+							"\r",
+							"\r",
+							"}//for dataleng\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/stores?near=90210&service.name=Windows%20Store",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"stores"
+					],
+					"query": [
+						{
+							"key": "near",
+							"value": "90210"
+						},
+						{
+							"key": "service.name",
+							"value": "Windows%20Store"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"if (pm.response.code == 201) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"//product id is not null\r",
+							"pm.test(\"product id not null and returned\", function(){\r",
+							"    pm.expect(jsondata.id).not.eql(null);\r",
+							"    console.log(jsondata.id);\r",
+							"});\r",
+							"\r",
+							"//product name\r",
+							"pm.test(\"product name is correct\", function(){\r",
+							"    pm.expect(jsondata.name).to.eql('New Product');\r",
+							"    console.log(jsondata.name);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//product type\r",
+							"pm.test(\"product type is correct\", function(){\r",
+							"    pm.expect(jsondata.type).to.eql('Hard Good');\r",
+							"    console.log(jsondata.type);\r",
+							"});\r",
+							"\r",
+							"//product upc\r",
+							"pm.test(\"product upc is correct\", function(){\r",
+							"    pm.expect(jsondata.upc).to.eql('12345676');\r",
+							"    console.log(jsondata.upc);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"//product price\r",
+							"pm.test(\"product price is correct\", function(){\r",
+							"    pm.expect(jsondata.price).to.eql(99.99);\r",
+							"    console.log(jsondata.price);\r",
+							"});\r",
+							"\r",
+							"//product description\r",
+							"pm.test(\"product description is correct\", function(){\r",
+							"    pm.expect(jsondata.description).to.eql('This is a placeholder request for creating a new product.');\r",
+							"    console.log(jsondata.description);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//product model\r",
+							"pm.test(\"product model is correct\", function(){\r",
+							"    pm.expect(jsondata.model).to.eql('NP12345');\r",
+							"    console.log(jsondata.model);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"New Product\",\n\t\"type\": \"Hard Good\",\n\t\"upc\": \"12345676\",\n\t\"price\": 99.99,\n\t\"description\": \"This is a placeholder request for creating a new product.\",\n\t\"model\": \"NP12345\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Store",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"if (pm.response.code == 201) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"//store id is not null\r",
+							"pm.test(\"store id not null and returned\", function(){\r",
+							"    pm.expect(jsondata.id).not.eql(null);\r",
+							"    console.log(jsondata.id);\r",
+							"});\r",
+							"\r",
+							"//store name\r",
+							"pm.test(\"store name is correct\", function(){\r",
+							"    pm.expect(jsondata.name).to.eql('New Store');\r",
+							"    console.log(jsondata.name);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//store type\r",
+							"pm.test(\"store type is correct\", function(){\r",
+							"    pm.expect(jsondata.type).to.eql('BigBox');\r",
+							"    console.log(jsondata.type);\r",
+							"});\r",
+							"\r",
+							"//store address\r",
+							"pm.test(\"store address is correct\", function(){\r",
+							"    pm.expect(jsondata.address).to.eql('123 Fake St');\r",
+							"    console.log(jsondata.address);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//store address2\r",
+							"pm.test(\"store address2 is correct\", function(){\r",
+							"    pm.expect(jsondata.address2).to.eql('');\r",
+							"    console.log(jsondata.address2);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"////store city\r",
+							"pm.test(\"store city is correct\", function(){\r",
+							"    pm.expect(jsondata.city).to.eql('Springfield');\r",
+							"    console.log(jsondata.city);\r",
+							"});\r",
+							"\r",
+							"////store state\r",
+							"pm.test(\"store state is correct\", function(){\r",
+							"    pm.expect(jsondata.state).to.eql('MN');\r",
+							"    console.log(jsondata.state);\r",
+							"})\r",
+							"\r",
+							"\r",
+							"//store zip\r",
+							"\r",
+							"pm.test(\"store zip is correct\", function(){\r",
+							"    pm.expect(jsondata.zip).to.eql(\"55123\");\r",
+							"    console.log(jsondata.zip);\r",
+							"});\r",
+							"\r",
+							"//store lat\r",
+							"pm.test(\"store lat is correct\", function(){\r",
+							"    pm.expect(jsondata.lat).to.eql(44.969658);\r",
+							"    console.log(jsondata.lat);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//store lng\r",
+							"pm.test(\"store lng is correct\", function(){\r",
+							"    pm.expect(jsondata.lng).to.eql(-93.449539);\r",
+							"    console.log(jsondata.lng);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"//store hours\r",
+							"pm.test(\"store lng is correct\", function(){\r",
+							"    pm.expect(jsondata.hours).to.eql('Mon: 10-9; Tue: 10-9; Wed: 10-9; Thurs: 10-9; Fri: 10-9; Sat: 10-9; Sun: 10-8');\r",
+							"    console.log(jsondata.hours);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{      \n\t  \"name\": \"New Store\",\n      \"type\": \"BigBox\",\n      \"address\": \"123 Fake St\",\n      \"address2\": \"\",\n      \"city\": \"Springfield\",\n      \"state\": \"MN\",\n      \"zip\": \"55123\",\n      \"lat\": 44.969658,\n      \"lng\": -93.449539,\n      \"hours\": \"Mon: 10-9; Tue: 10-9; Wed: 10-9; Thurs: 10-9; Fri: 10-9; Sat: 10-9; Sun: 10-8\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/stores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Service",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"\r",
+							"if (pm.response.code == 201) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"//service id is not null\r",
+							"pm.test(\"service id not null and returned\", function(){\r",
+							"    pm.expect(jsondata.id).not.eql(null);\r",
+							"    console.log(jsondata.id);\r",
+							"});\r",
+							"\r",
+							"//service name\r",
+							"pm.test(\"service name is correct\", function(){\r",
+							"    pm.expect(jsondata.name).to.eql('New Service');\r",
+							"    console.log(jsondata.name);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{      \n\t  \"name\": \"New Service\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Category",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// to check if the response time less than 2000\r",
+							"pm.test(\"response time less than 2000 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//to parse the json in rhe response body\r",
+							"const jsondata = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"//to debug on console\r",
+							"console.log(jsondata);\r",
+							"var errorblock = jsondata.errors;\r",
+							"\r",
+							"console.log(errorblock);\r",
+							"if (pm.response.code == 201) {\r",
+							"\r",
+							"//to test the api get 200 and working fine\r",
+							"   pm.test(\"status code is 200\", function(){\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"else\r",
+							"if (pm.response.code == 400) {\r",
+							"\r",
+							"                     pm.test(\"Error code \" + jsondata.code , function () { \r",
+							"                     pm.expect(jsondata.code).to.eql(400);\r",
+							"                     });\r",
+							"\r",
+							"\r",
+							"                    pm.test(\"Error message is (\" + errorblock[0].message  + \")\" , function () { \r",
+							"                     pm.expect(errorblock[0].message).to.eql(\"id must be unique\");\r",
+							"\r",
+							"                     });\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{      \n\t\"id\": \"pcmcat12345\",\n\t\"name\": \"New Category\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://localhost:3030/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
